@@ -1,7 +1,8 @@
 package org.example.model.domain;
 
-class Product {
-    private static int id = 0;
+public class Product {
+    private static int idNextNumber = 1;
+    private int id;
     private String name;
     private double price;
     private String type;
@@ -9,7 +10,8 @@ class Product {
 
 
     public Product(String name, double price) {
-        id += 1;
+        id = idNextNumber;
+        idNextNumber++;
         this.name = name;
         this.price = price;
     }
