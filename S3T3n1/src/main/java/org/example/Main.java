@@ -25,7 +25,27 @@ public class Main {
         invoice1.removeProduct(flower);
         System.out.println(invoice1.getTotalSale());
         invoice1.removeProduct(tree);//It shouldn't be able to substract this one
-        System.out.println(invoice1.getTotalSale());
+        System.out.println(invoice1.getTotalSale() + "\n");
+        invoice1.addProduct(tree);
+        invoice1.addProduct(tree);
+        invoice1.addProduct(flower);
+        invoice1.addProduct(woodArc2);
+
+        //TEST FlowerShop
+        FlowerShop flowerShop = new FlowerShop("La Rosita");
+        flowerShop.addStock(tree);
+        flowerShop.addStock(flower);
+        flowerShop.addStock(woodArc);
+        flowerShop.showStock();
+
+        flowerShop.addInvoice(invoice1);
+        System.out.println(flowerShop.getTotalEarnings());
+        flowerShop.showInvoiceList();
+        flowerShop.removeInvoice(invoice1);
+        System.out.println(flowerShop.getTotalEarnings());
+
+
+
 
 
 

@@ -71,4 +71,21 @@ public class Invoice {
 		System.out.println(this.totalSale);
 	}*/
 
+	public String toString(){
+		//return "Id = " + this.getId() + " | Products = " + productList.forEach(p -> p.getName()); +;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Id = ").append(id).append(" | [");
+
+		for (int i = 0; i < productList.size(); i++) {
+			stringBuilder.append(productList.get(i).getName());
+			if (i < productList.size() - 1) {
+				stringBuilder.append(", ");
+			}
+		}
+
+		stringBuilder.append("] | TOTAL: " + this.totalSale + "€");
+
+		return stringBuilder.toString();
+	}
+
 }
