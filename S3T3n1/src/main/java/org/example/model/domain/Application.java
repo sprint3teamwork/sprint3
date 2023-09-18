@@ -73,4 +73,197 @@ public class Application {
         }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //ARNAU METODS
+    //StartBuy
+    //Invoice Log
+    public static void addTree(){
+        String name = "";
+        float price = 0.0f;
+        float height = 0.0f;
+
+        System.out.println("What's the tree species?");
+        name = sc.nextLine();
+        System.out.println("The price will be?");
+        price = Float.parseFloat(sc.next());
+        System.out.println("And it's height?");
+        height = Float.parseFloat(sc.next());
+        Product p = productFactory.createProduct("tree",name,price,height);
+        flowerShop.addStock(p);
+
+    }
+    public static void addFlower(){
+        String name = "";
+        float price = 0.0f;
+        String color = "";
+
+        System.out.println("What's the flower species?");
+        name = sc.nextLine();
+        System.out.println("The price will be?");
+        price = Float.parseFloat(sc.next());
+        System.out.println("And it's color is?");
+        color = sc.nextLine();
+        Product p = productFactory.createProduct("flower",name,price,color);
+        flowerShop.addStock(p);
+
+    }
+    public static void addDecoration(){
+        String name = "";
+        float price = 0.0f;
+        int option = 0;
+        boolean isWood;
+
+        System.out.println("What's the item's name?");
+        name = sc.nextLine();
+        System.out.println("The price will be?");
+        price = Float.parseFloat(sc.next());
+        System.out.println("And it is made of wood(1) or plastic?(2)");
+        option = sc.nextInt();
+        sc.nextLine();
+        isWood = option == 1;//if option == 1,isWood = true, if not is plastic
+        Product p = productFactory.createProduct("decoration",name,price,isWood);
+        flowerShop.addStock(p);
+
+    }
+
+    public static void showStock(){
+        flowerShop.showStock();
+    }
+
+    public static void startBuy(){
+        int idSelected = 0;
+
+        System.out.println("Here is the product list. Type the id of the product you want to buy");
+        flowerShop.showStock();
+        idSelected = sc.nextInt();
+        sc.nextLine();
+        //flowerShop.removeStock();
+
+
+
+    }
+
 }
