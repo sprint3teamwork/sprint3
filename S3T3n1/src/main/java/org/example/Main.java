@@ -7,7 +7,7 @@ public class Main {
 
 
         //TEST Products
-        Product tree = new Tree("Oak",24.0d, 45f);
+       /* Product tree = new Tree("Oak",24.0d, 45f);
         Product flower = new Flower("Dalia",24.0d, "blue");
         Product woodArc = new Decoration("Arc",24.0d, true);
         Product woodArc2 = new Decoration("Arc2",24.0d, true);
@@ -42,7 +42,9 @@ public class Main {
         System.out.println(flowerShop.getTotalEarnings());
         flowerShop.showInvoiceList();
         flowerShop.removeInvoice(invoice1);
-        System.out.println(flowerShop.getTotalEarnings());
+        System.out.println(flowerShop.getTotalEarnings());*/
+
+        Application.boot();
 
 
 
