@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Invoice {
-	
-	private static int id = 0;
+	private static int idNextNumber = 1;
+	private int id;
 	private List<Product> productList;
 	private double totalSale = 0.0;
 	
 	public Invoice() {
-		id += 1;
+		id = idNextNumber;
+		idNextNumber++;
 		productList = new ArrayList();
 	}
 
@@ -30,7 +31,7 @@ public class Invoice {
 		this.totalSale = totalSale;
 	}
 
-	public static int getId() {
+	public int getId() {
 		return id;
 	}
 	
@@ -47,20 +48,44 @@ public class Invoice {
 	}
 	
 	public void addProduct(Product p) {
+
 		productList.add(p);
+		totalSale += p.getPrice();
 	}
 	
 	public void removeProduct(Product p) {
+		if(productList.contains(p)){
 		productList.remove(p);
+		totalSale -= p.getPrice();
+		}else{
+			//we need to think were we'll deal with this
+		}
 	}
 	
 	public void printProductList() {
 		productList.forEach(System.out::println);
 	}
 	
-	public void sumTotal() {
+	/*public void sumTotal() {
 		productList.forEach(p -> this.totalSale += p.getPrice());
 		System.out.println(this.totalSale);
+	}*/
+
+	public String toString(){
+		//return "Id = " + this.getId() + " | Products = " + productList.forEach(p -> p.getName()); +;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Id = ").append(id).append(" | [");
+
+		for (int i = 0; i < productList.size(); i++) {
+			stringBuilder.append(productList.get(i).getName());
+			if (i < productList.size() - 1) {
+				stringBuilder.append(", ");
+			}
+		}
+
+		stringBuilder.append("] | TOTAL: " + this.totalSale + "€");
+
+		return stringBuilder.toString();
 	}
 
 }
