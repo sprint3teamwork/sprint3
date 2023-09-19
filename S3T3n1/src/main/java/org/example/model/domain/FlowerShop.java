@@ -56,12 +56,13 @@ public class FlowerShop {
         if(stockList.contains(p)){
             stockList.remove(p);
         }else{
-            //we need to think where and how will we deal with this
+            System.out.println("There was no id match.");
         }
     }
 
     public void showStock(){
         stockList.forEach(System.out::println);
+        System.out.println("\n\n");
     }
 
     public void addInvoice(Invoice i ){
