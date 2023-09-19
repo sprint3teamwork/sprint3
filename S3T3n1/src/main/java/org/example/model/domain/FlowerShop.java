@@ -56,7 +56,7 @@ public class FlowerShop {
         if(stockList.contains(p)){
             stockList.remove(p);
         }else{
-            //we need to think where and how will we deal with this
+            System.out.println("There was no id match.");
         }
     }
 
