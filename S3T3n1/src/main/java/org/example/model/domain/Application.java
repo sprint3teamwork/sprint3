@@ -24,8 +24,8 @@ public class Application {
                 case 8 -> System.out.print("A reveure!");
                 case 9 -> System.out.print("A reveure!");
                 case 10 -> System.out.print("A reveure!");
-                case 11 -> System.out.print("A reveure!");
-                case 12 -> System.out.print("A reveure!");
+                case 11 -> startBuy();
+                case 12 -> invoiceLog();
                 case 13 -> System.out.print("A reveure!");
             }
         }while(option != 0);
@@ -102,22 +102,29 @@ public class Application {
     public static int searchList(int id, String type) {		//returns -1 if product is not in list.
         int counter = 0;
         int index = -1;
-        if (type.equalsIgnoreCase(flowerShop.getStockList().get(0).getClass().getSuperclass().getSimpleName())) {			//enter if superclass is product
+        System.out.println("1WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (type.equalsIgnoreCase("product")){//flowerShop.getStockList().get(0).getClass().getSuperclass().getSimpleName())) {			//enter if superclass is product
             while (flowerShop.getStockList().get(counter).getId() != id && counter < flowerShop.getStockList().size()) {
                 if (flowerShop.getStockList().get(counter).getId() == id) {
                     index = counter;
                 }
                 counter++;
             }
-        } else if (type.equalsIgnoreCase(flowerShop.getInvoiceLog().get(0).getClass().getSimpleName())) {					//enter if class is invoice
-            while (flowerShop.getInvoiceLog().get(counter).getId() != id && counter < flowerShop.getInvoiceLog().size()) {
+        } else if (type.equalsIgnoreCase("invoice")){//flowerShop.getInvoiceLog().get(0).getClass().getSimpleName())) {					//enter if class is invoice
+            System.out.println("2WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            System.out.println("INVOICELOG SIZE: " + flowerShop.getInvoiceLog().size());////////////////////////////////////////////////////////////////////////////////
+            System.out.println("id in invice counter position:" + flowerShop.getInvoiceLog().get(counter).getId() + "\n" + "id: " + id);//////////////////////////////////////////////////////
+            while (counter < (flowerShop.getInvoiceLog().size()) && (flowerShop.getInvoiceLog().get(counter).getId() != id && counter != 0)) {
+                System.out.println("3WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
                     index = counter;
+                    counter = flowerShop.getInvoiceLog().size();
+                    System.out.println("4WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
                 counter++;
             }
         }
-        return index;
+        return 1;//index;
     }
 
     public static void removeTree(int id, String type) {
@@ -198,7 +205,6 @@ public class Application {
 
 
     //ARNAU METODS
-    //StartBuy
     //Invoice Log
     public static void addTree(){
         String name = "";
@@ -254,15 +260,80 @@ public class Application {
     }
 
     public static void startBuy(){
-        int idSelected = 0;
-        int idfound = -1;
+        int option = 1;
+        int invoiceId;
+        int invoicePosition;
+        Invoice invoice = new Invoice();
 
-        System.out.println("Here is the product list. Type the id of the product you want to buy");
+        flowerShop.addInvoice(invoice);
+        invoicePosition = searchList(invoice.getId(),"invoice");
+        System.out.println("INVOICE POSITION = " + invoicePosition);////////////////////////////////////////////////////////////////////////////////////RETORNA UN -1
+        invoice = flowerShop.getInvoiceLog().get(invoicePosition);
+
+        while (option == 1){
+            System.out.println("Here is the product list. Type the id of the product you want to buy");
+            invoice = saleLoop(invoice);
+            System.out.println("Do you want to keep shopping?\nYES(1)      NO(2)       (3)[Delete product from cart]\n");
+
+            if(option == 3 && invoice.getProductList().size() == 0) {
+                System.out.println("Your shopping cart is empty\nDo you want to keep shopping?\n" +
+                        "YES(1)      NO(2)\n");
+            } else if (option == 3 && invoice.getProductList().size() > 0) {
+                deleteProductFromInvoice(invoice);
+                option = 1;
+            }
+            System.out.println("Response (numerical): ");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
+
+        System.out.println("\nRECEIPT:\n\n");
+        System.out.println(invoice.toString() + "\nInvoice archived.");
+    }
+
+    public static Invoice saleLoop(Invoice invoice){
+        int idSelected;
+        int idfound = -1;
+        int productPosition;
+
+
         flowerShop.showStock();
+        System.out.println("Id: ");
         idSelected = sc.nextInt();
         sc.nextLine();
-        searchList(idfound,"product");
-        //flowerShop.removeStock();
+        productPosition =  searchList(idSelected,"product");
 
+        while (productPosition == -1){
+            productPosition = searchList(idSelected,"product");
+            System.out.println("Id mismatch.\nEnter Id again: ");
+            idSelected = sc.nextInt();
+        }
+
+        flowerShop.removeStock(flowerShop.getStockList().get(productPosition));
+        invoice.addProduct(flowerShop.getStockList().get(productPosition));
+        System.out.println("Shopping cart:\n");
+        System.out.println(invoice.toString() + "\n");
+
+        return invoice;
+    }
+
+
+    public static void deleteProductFromInvoice(Invoice invoice){
+        int numberSelected;
+        Product p;
+
+        System.out.println("Select the number of the product you want to delete from the invoice:\n");
+        System.out.print(invoice.toString() + "\nProduct number: ");
+        numberSelected = sc.nextInt();
+        sc.nextLine();
+        p = invoice.getProductList().get(numberSelected-1);
+        invoice.removeProduct(p);
+        flowerShop.addStock(p);
+        //add sum to networth/stockvalue
+        System.out.println("'" + p.getName() + "' was deleted succesfully.");
+    }
+
+    public static void invoiceLog(){
+        flowerShop.showInvoiceList();
     }
 }
