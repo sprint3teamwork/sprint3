@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class FlowerShop {
+	
     private String name;
     private List<Product> stockList;
     private List<Invoice> invoiceLog;
     private double totalEarnings;
     private double netWorth;
     private Map<String, Integer> productMap;
-
 
 	public FlowerShop(String name) {
         this.name = name;
@@ -21,6 +21,7 @@ public class FlowerShop {
         this.totalEarnings = 0.0d;
         this.netWorth = 0.0d;
         this.productMap = new HashMap<>();
+        createMap();
     }
 
     public String getName() {
@@ -69,6 +70,12 @@ public class FlowerShop {
     
     public void setProductMap(Map<String, Integer> productMap) {
     	this.productMap = productMap;
+    }
+    
+    public void createMap() {
+    	productMap.put("Tree", 0);
+    	productMap.put("Flower", 0);
+    	productMap.put("Decoration", 0);
     }
     
     //aqui me sale error con el get objeto
