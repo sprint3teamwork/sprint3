@@ -53,15 +53,12 @@ public class FlowerShop {
     }
 
     public void removeStock(Product p){
-        if(stockList.contains(p)){
             stockList.remove(p);
-        }else{
-            //we need to think where and how will we deal with this
-        }
     }
 
     public void showStock(){
         stockList.forEach(System.out::println);
+        System.out.print("\n");
     }
 
     public void addInvoice(Invoice i ){

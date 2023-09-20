@@ -35,7 +35,7 @@ public class Invoice {
 		return id;
 	}
 	
-	public int searchProductList(int productId) {		//returns -1 if product is not in list. 
+	/*public int searchProductList(int productId) {		//returns -1 if product is not in list.
 		int counter = 0;
 		int index = -1;
 		while (productList.get(counter).getId() != productId && counter < productList.size()) {
@@ -45,7 +45,7 @@ public class Invoice {
 			counter++;
 		}
 		return index;
-	}
+	}*/
 	
 	public void addProduct(Product p) {
 
@@ -55,8 +55,8 @@ public class Invoice {
 	
 	public void removeProduct(Product p) {
 		if(productList.contains(p)){
-		productList.remove(p);
-		totalSale -= p.getPrice();
+			productList.remove(p);
+			totalSale -= p.getPrice();
 		}else{
 			//we need to think were we'll deal with this
 		}
@@ -71,19 +71,18 @@ public class Invoice {
 		System.out.println(this.totalSale);
 	}*/
 
-	public String toString(){
-		//return "Id = " + this.getId() + " | Products = " + productList.forEach(p -> p.getName()); +;
+	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Id = ").append(id).append(" | [");
+		stringBuilder.append("Id = ").append(this.id).append(" | [");
 
 		for (int i = 0; i < productList.size(); i++) {
-			stringBuilder.append(productList.get(i).getName());
+			stringBuilder.append("(").append(i + 1).append(")").append(productList.get(i).getName());
 			if (i < productList.size() - 1) {
 				stringBuilder.append(", ");
 			}
 		}
 
-		stringBuilder.append("] | TOTAL: " + this.totalSale + "€");
+		stringBuilder.append("] | TOTAL: ").append(this.totalSale).append("€");
 
 		return stringBuilder.toString();
 	}
