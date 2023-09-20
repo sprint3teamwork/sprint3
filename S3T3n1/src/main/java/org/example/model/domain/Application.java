@@ -19,7 +19,7 @@ public class Application {
                 case 3 -> addFlower();
                 case 4 -> addDecoration();
                 case 5 -> showStock();
-                case 6 -> System.out.print("A reveure!");
+                case 6 ->
                 case 7 -> System.out.print("A reveure!");
                 case 8 -> System.out.print("A reveure!");
                 case 9 -> System.out.print("A reveure!");
@@ -74,7 +74,6 @@ public class Application {
 
     }
 
-
   //TEST DATA////////////////////////////////////////////////////////////////////////////////////////
     public static void createSmapleData(){
 
@@ -90,26 +89,6 @@ public class Application {
         flowerShop.addStock(woodArc2);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////////// Christian methods //////////////////////////////
 
     public static int searchList(int id, String type) {        //returns -1 if product is not in list.
@@ -122,6 +101,7 @@ public class Application {
         }
         return index;
     }
+
     public static int searchStock(int id){
         int counter = 0;
         int index = -1;
@@ -135,6 +115,7 @@ public class Application {
         }
         return index;
     }
+
     public static int searchInvoiceLog(int id){
         int counter = 0;
         int index = -1;
@@ -149,28 +130,9 @@ public class Application {
         return index;
     }
 
-           /* do {
-                if (flowerShop.getStockList().get(counter).getId() == id) {
-                    System.out.println("1WORKING");////////////////////////////////////////////////////////////////////
-                    index = counter;
-                    //counter = flowerShop.getStockList().size();
-                }
-                counter++;
-            }while (counter < flowerShop.getStockList().size() && flowerShop.getStockList().get(counter-1).getId() != id);
-
-        } else if (type.equalsIgnoreCase("invoice")){			//enter if class is invoice
-            do {
-                 if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
-                    index = counter;
-                    //counter = flowerShop.getInvoiceLog().size();
-                 }
-                counter++;
-            }while((counter < flowerShop.getInvoiceLog().size()) && flowerShop.getInvoiceLog().get(counter-1).getId() != id);
-        }*/
-
-    public static void removeTree(int id, String type) {
-        int listIndex = searchList(id, type);
-        if (listIndex != -1) {
+    public static void removeTree(int id) {
+        int listIndex = searchList(id, "product");
+        if (flowerShop.getStockList().get(listIndex) != null) {
             Product product = flowerShop.getStockList().get(listIndex);
             flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
             System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
@@ -179,9 +141,9 @@ public class Application {
         }
     }
 
-    public static void removeFlower(int id, String type) {
-        int listIndex = searchList(id, type);
-        if (listIndex != -1) {
+    public static void removeFlower(int id) {
+        int listIndex = searchList(id, "product");
+        if (flowerShop.getStockList().get(listIndex) != null) {
             Product product = flowerShop.getStockList().get(listIndex);
             flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
             System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
@@ -190,9 +152,9 @@ public class Application {
         }
     }
 
-    public void removeDecoration(int id, String type) {
-        int listIndex = searchList(id, type);
-        if (listIndex != -1) {
+    public static void removeDecoration(int id) {
+        int listIndex = searchList(id, "product");
+        if (flowerShop.getStockList().get(listIndex) != null) {
             Product product = flowerShop.getStockList().get(listIndex);
             flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
             System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
@@ -201,52 +163,12 @@ public class Application {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static int removerPrompt(){
+        System.out.println("Here is the product list. Type the id of the product you want to remove");
+        flowerShop.showStock();
+    }
 
     //ARNAU METODS
-    //Invoice Log
     public static void addTree(){
         String name = "";
         float price = 0.0f;
@@ -341,7 +263,7 @@ public class Application {
         idSelected = sc.nextInt();
         sc.nextLine();
         productPosition =  searchList(idSelected,"product");
-        
+
         while (productPosition == -1){
             productPosition = searchList(idSelected,"product");
             System.out.println("Id mismatch.\nEnter Id again: ");
@@ -355,7 +277,6 @@ public class Application {
 
         return invoice;
     }
-
 
     public static void deleteProductFromInvoice(Invoice invoice){
         int numberSelected;
