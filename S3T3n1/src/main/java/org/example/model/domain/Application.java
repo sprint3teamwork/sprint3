@@ -112,11 +112,44 @@ public class Application {
 
 //////////////// Christian methods //////////////////////////////
 
-    public static int searchList(int id, String type) {		//returns -1 if product is not in list.
+    public static int searchList(int id, String type) {        //returns -1 if product is not in list.
+        int index = -1;
+
+        if (type.equalsIgnoreCase("product")) {
+            index = searchStock(id);
+        } else if (type.equalsIgnoreCase("invoice")) {
+            index = searchInvoiceLog(id);
+        }
+        return index;
+    }
+    public static int searchStock(int id){
         int counter = 0;
         int index = -1;
-        if (type.equalsIgnoreCase("product")){			//enter if superclass is product
-            do {
+
+        while (counter < flowerShop.getStockList().size()) {
+            if (flowerShop.getStockList().get(counter).getId() == id) {
+                index = counter;
+                counter = flowerShop.getStockList().size();
+            }
+            counter++;
+        }
+        return index;
+    }
+    public static int searchInvoiceLog(int id){
+        int counter = 0;
+        int index = -1;
+
+        while (counter < flowerShop.getInvoiceLog().size()) {
+            if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
+                index = counter;
+                counter = flowerShop.getInvoiceLog().size();
+            }
+            counter++;
+        }
+        return index;
+    }
+
+           /* do {
                 if (flowerShop.getStockList().get(counter).getId() == id) {
                     System.out.println("1WORKING");////////////////////////////////////////////////////////////////////
                     index = counter;
@@ -133,9 +166,7 @@ public class Application {
                  }
                 counter++;
             }while((counter < flowerShop.getInvoiceLog().size()) && flowerShop.getInvoiceLog().get(counter-1).getId() != id);
-        }
-        return index;
-    }
+        }*/
 
     public static void removeTree(int id, String type) {
         int listIndex = searchList(id, type);
@@ -310,16 +341,15 @@ public class Application {
         idSelected = sc.nextInt();
         sc.nextLine();
         productPosition =  searchList(idSelected,"product");
-
-        System.out.println("Product position : " + productPosition);/////////////////////////////////////////////
+        
         while (productPosition == -1){
             productPosition = searchList(idSelected,"product");
             System.out.println("Id mismatch.\nEnter Id again: ");
             idSelected = sc.nextInt();
         }
 
-        flowerShop.removeStock(flowerShop.getStockList().get(productPosition));
         invoice.addProduct(flowerShop.getStockList().get(productPosition));
+        flowerShop.removeStock(flowerShop.getStockList().get(productPosition));
         System.out.println("Shopping cart:\n");
         System.out.println(invoice.toString() + "\n");
 

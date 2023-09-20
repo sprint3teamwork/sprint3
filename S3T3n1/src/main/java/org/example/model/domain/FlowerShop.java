@@ -53,11 +53,7 @@ public class FlowerShop {
     }
 
     public void removeStock(Product p){
-        if(stockList.contains(p)){
             stockList.remove(p);
-        }else{
-            System.out.println("There was no id match.");
-        }
     }
 
     public void showStock(){
