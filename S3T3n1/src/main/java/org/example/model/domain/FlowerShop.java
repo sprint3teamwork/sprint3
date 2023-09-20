@@ -62,7 +62,7 @@ public class FlowerShop {
 
     public void showStock(){
         stockList.forEach(System.out::println);
-        System.out.println("\n\n");
+        System.out.print("\n");
     }
 
     public void addInvoice(Invoice i ){

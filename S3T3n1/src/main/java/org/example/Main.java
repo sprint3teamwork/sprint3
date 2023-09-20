@@ -6,11 +6,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-        //TEST Products
-       /* Product tree = new Tree("Oak",24.0d, 45f);
+        /*TEST Products
+        Product tree = new Tree("Oak",24.0d, 45f);
         Product flower = new Flower("Dalia",24.0d, "blue");
         Product woodArc = new Decoration("Arc",24.0d, true);
         Product woodArc2 = new Decoration("Arc2",24.0d, true);
+
         System.out.println(tree.toString());
         System.out.println(flower.toString());
         System.out.println(woodArc.toString() + "\n");
@@ -32,19 +33,20 @@ public class Main {
         invoice1.addProduct(woodArc2);
 
         //TEST FlowerShop
-        FlowerShop flowerShop = new FlowerShop("La Rosita");
+        /*FlowerShop flowerShop = new FlowerShop("La Rosita");
         flowerShop.addStock(tree);
         flowerShop.addStock(flower);
-        flowerShop.addStock(woodArc);
-        flowerShop.showStock();
+        flowerShop.addStock(woodArc);*/
+        //flowerShop.showStock();
 
-        flowerShop.addInvoice(invoice1);
+       /*flowerShop.addInvoice(invoice1);
         System.out.println(flowerShop.getTotalEarnings());
         flowerShop.showInvoiceList();
         flowerShop.removeInvoice(invoice1);
         System.out.println(flowerShop.getTotalEarnings());*/
 
         Application.boot();
+
 
 
 

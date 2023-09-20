@@ -9,16 +9,16 @@ public class Application {
     public static void boot() {
         int option = -1;
 
-
+        createSmapleData();/////////////////////////////////////////////////////////////////////////////////////////
         do {
             option = menu();
             switch(option) {
                 case 0 -> closeApplication();
                 case 1 -> createFlowerShop();
-                case 2 -> System.out.print("A reveure!");
-                case 3 -> System.out.print("A reveure!");
-                case 4 -> System.out.print("A reveure!");
-                case 5 -> System.out.print("A reveure!");
+                case 2 -> addTree();
+                case 3 -> addFlower();
+                case 4 -> addDecoration();
+                case 5 -> showStock();
                 case 6 -> System.out.print("A reveure!");
                 case 7 -> System.out.print("A reveure!");
                 case 8 -> System.out.print("A reveure!");
@@ -75,7 +75,20 @@ public class Application {
     }
 
 
+  //TEST DATA////////////////////////////////////////////////////////////////////////////////////////
+    public static void createSmapleData(){
 
+        flowerShop = new FlowerShop("La Rosita");
+
+        Product tree = new Tree("Oak",24.0d, 45f);
+        Product flower = new Flower("Dalia",24.0d, "blue");
+        Product woodArc = new Decoration("Arc",24.0d, true);
+        Product woodArc2 = new Decoration("Arc2",24.0d, true);
+        flowerShop.addStock(tree);
+        flowerShop.addStock(flower);
+        flowerShop.addStock(woodArc);
+        flowerShop.addStock(woodArc2);
+    }
 
 
 
@@ -102,29 +115,26 @@ public class Application {
     public static int searchList(int id, String type) {		//returns -1 if product is not in list.
         int counter = 0;
         int index = -1;
-        System.out.println("1WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (type.equalsIgnoreCase("product")){//flowerShop.getStockList().get(0).getClass().getSuperclass().getSimpleName())) {			//enter if superclass is product
-            while (flowerShop.getStockList().get(counter).getId() != id && counter < flowerShop.getStockList().size()) {
+        if (type.equalsIgnoreCase("product")){			//enter if superclass is product
+            do {
                 if (flowerShop.getStockList().get(counter).getId() == id) {
+                    System.out.println("1WORKING");////////////////////////////////////////////////////////////////////
                     index = counter;
+                    //counter = flowerShop.getStockList().size();
                 }
                 counter++;
-            }
-        } else if (type.equalsIgnoreCase("invoice")){//flowerShop.getInvoiceLog().get(0).getClass().getSimpleName())) {					//enter if class is invoice
-            System.out.println("2WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            System.out.println("INVOICELOG SIZE: " + flowerShop.getInvoiceLog().size());////////////////////////////////////////////////////////////////////////////////
-            System.out.println("id in invice counter position:" + flowerShop.getInvoiceLog().get(counter).getId() + "\n" + "id: " + id);//////////////////////////////////////////////////////
-            while (counter < (flowerShop.getInvoiceLog().size()) && (flowerShop.getInvoiceLog().get(counter).getId() != id && counter != 0)) {
-                System.out.println("3WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
+            }while (counter < flowerShop.getStockList().size() && flowerShop.getStockList().get(counter-1).getId() != id);
+
+        } else if (type.equalsIgnoreCase("invoice")){			//enter if class is invoice
+            do {
+                 if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
                     index = counter;
-                    counter = flowerShop.getInvoiceLog().size();
-                    System.out.println("4WORKING!!!!!!");//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                }
+                    //counter = flowerShop.getInvoiceLog().size();
+                 }
                 counter++;
-            }
+            }while((counter < flowerShop.getInvoiceLog().size()) && flowerShop.getInvoiceLog().get(counter-1).getId() != id);
         }
-        return 1;//index;
+        return index;
     }
 
     public static void removeTree(int id, String type) {
@@ -219,7 +229,7 @@ public class Application {
         height = Float.parseFloat(sc.next());
         Product p = productFactory.createProduct("tree",name,price,height);
         flowerShop.addStock(p);
-
+        System.out.println("The item '" + p.getName() + "' was created succesfully!\n");
     }
     public static void addFlower(){
         String name = "";
@@ -234,7 +244,7 @@ public class Application {
         color = sc.nextLine();
         Product p = productFactory.createProduct("flower",name,price,color);
         flowerShop.addStock(p);
-
+        System.out.println("The item '" + p.getName() + "' was created succesfully!\n");
     }
     public static void addDecoration(){
         String name = "";
@@ -252,7 +262,7 @@ public class Application {
         isWood = option == 1;//if option == 1,isWood = true, if not is plastic
         Product p = productFactory.createProduct("decoration",name,price,isWood);
         flowerShop.addStock(p);
-
+        System.out.println("The item '" + p.getName() + "' was created succesfully!\n");
     }
 
     public static void showStock(){
@@ -267,7 +277,6 @@ public class Application {
 
         flowerShop.addInvoice(invoice);
         invoicePosition = searchList(invoice.getId(),"invoice");
-        System.out.println("INVOICE POSITION = " + invoicePosition);////////////////////////////////////////////////////////////////////////////////////RETORNA UN -1
         invoice = flowerShop.getInvoiceLog().get(invoicePosition);
 
         while (option == 1){
@@ -287,22 +296,22 @@ public class Application {
             sc.nextLine();
         }
 
-        System.out.println("\nRECEIPT:\n\n");
+        System.out.println("\nRECEIPT:");
         System.out.println(invoice.toString() + "\nInvoice archived.");
     }
 
     public static Invoice saleLoop(Invoice invoice){
         int idSelected;
-        int idfound = -1;
-        int productPosition;
+        int productPosition = -1;
 
 
         flowerShop.showStock();
-        System.out.println("Id: ");
+        System.out.print("Id: ");
         idSelected = sc.nextInt();
         sc.nextLine();
         productPosition =  searchList(idSelected,"product");
 
+        System.out.println("Product position : " + productPosition);/////////////////////////////////////////////
         while (productPosition == -1){
             productPosition = searchList(idSelected,"product");
             System.out.println("Id mismatch.\nEnter Id again: ");
