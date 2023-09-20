@@ -3,12 +3,14 @@ package org.example.model.domain;
 import java.util.Scanner;
 
 public class Application {
-    static Scanner sc = new Scanner(System.in);
+    
+	static Scanner sc = new Scanner(System.in);
     static FlowerShop flowerShop = null;
     static ProductFactory productFactory = new ProductFactory();
+    
     public static void boot() {
+    	
         int option = -1;
-
 
         do {
             option = menu();
@@ -28,7 +30,7 @@ public class Application {
                 case 12 -> System.out.print("A reveure!");
                 case 13 -> System.out.print("A reveure!");
             }
-        }while(option != 0);
+        } while(option != 0);
 
     }
 
@@ -73,43 +75,84 @@ public class Application {
         }
 
     }
-}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //////////////// Christian methods //////////////////////////////
+    
+    public void testObjectApp() {
+    	//TEST Products
+    	System.out.println("TESTING PRODUCTS");
+        Product tree = new Tree("Oak",24.0d, 45f);
+        Product flower = new Flower("Dalia",24.0d, "blue");
+        Product woodArc = new Decoration("Arc",24.0d, true);
+        Product woodArc2 = new Decoration("Arc2",24.0d, true);
+        System.out.println(tree.toString());
+        System.out.println(flower.toString());
+        System.out.println(woodArc.toString());
+        System.out.println(woodArc2.toString() + "\n");
 
+        //TEST Invoice
+        System.out.println("TESTING INVOICE");
+        Invoice invoice1 = new Invoice();
+        System.out.println(invoice1.getId());
+        invoice1.addProduct(woodArc);
+        invoice1.addProduct(flower);
+        System.out.println(invoice1.getProductList().toString());
+        System.out.println(invoice1.getTotalSale());
+        invoice1.removeProduct(flower);
+        System.out.println(invoice1.getTotalSale());
+        invoice1.removeProduct(tree);//It shouldn't be able to substract this one
+        System.out.println(invoice1.getTotalSale() + "\n");
+        invoice1.addProduct(tree);
+        invoice1.addProduct(tree);
+        invoice1.addProduct(flower);
+        invoice1.addProduct(woodArc2);
 
+        //TEST FlowerShop
+        System.out.println("TESTING FLOWERSHOP");
+        flowerShop.addStock(tree);
+        flowerShop.addStock(flower);
+        flowerShop.addStock(woodArc);
+        flowerShop.showStock();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//////////////// Christian methods //////////////////////////////
+        flowerShop.addInvoice(invoice1);
+        System.out.println(flowerShop.getTotalEarnings());
+        flowerShop.showInvoiceList();
+        //flowerShop.removeInvoice(invoice1);
+        System.out.println(flowerShop.getTotalEarnings());
+    }
 	
 	public int searchList(int id, String type) {		//returns -1 if product is not in list. 
 		int counter = 0;
 		int index = -1;
-		if (type.equalsIgnoreCase(flowerShop.getStockList().get(0).getClass().getSuperclass().getSimpleName())) {			//enter if superclass is product
+		if (type.equalsIgnoreCase("product")) {			//enter if superclass is product
 			while (flowerShop.getStockList().get(counter).getId() != id && counter < flowerShop.getStockList().size()) {
 				if (flowerShop.getStockList().get(counter).getId() == id) {
 					index = counter;
 				}
 				counter++;
 			}
-		} else if (type.equalsIgnoreCase(flowerShop.getInvoiceLog().get(0).getClass().getSimpleName())) {					//enter if class is invoice
+		} else if (type.equalsIgnoreCase("invoice")) {					//enter if class is invoice
 			while (flowerShop.getInvoiceLog().get(counter).getId() != id && counter < flowerShop.getInvoiceLog().size()) {
 				if (flowerShop.getInvoiceLog().get(counter).getId() == id) {
 					index = counter;
@@ -122,7 +165,7 @@ public class Application {
     
 	public void removeTree(int id, String type) {		
 		int listIndex = searchList(id, type);
-		if (flowerShop.getStockList().get(listIndex) != null) {
+		if (listIndex != -1) {
 			Product product = flowerShop.getStockList().get(listIndex);
 			flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
 			System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
@@ -133,7 +176,7 @@ public class Application {
 	
 	public void removeFlower(int id, String type) {		
 		int listIndex = searchList(id, type);
-		if (flowerShop.getStockList().get(listIndex) != null) {
+		if (listIndex != -1) {
 			Product product = flowerShop.getStockList().get(listIndex);
 			flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
 			System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
@@ -144,13 +187,25 @@ public class Application {
 	
 	public void removeDecoration(int id, String type) {		
 		int listIndex = searchList(id, type);
-		if (flowerShop.getStockList().get(listIndex) != null) {
+		if (listIndex != -1) {
 			Product product = flowerShop.getStockList().get(listIndex);
 			flowerShop.removeStock(flowerShop.getStockList().get(listIndex));
 			System.out.println("The " + product.getType() + " " + product.getId() + " " + product.getName() + " has been removed from the list.");
 		} else {
 			System.out.println("The decoration with Id# " + id + " does not exist.");
 		}
+	}
+	
+	public void printTotalEarnings() {
+		System.out.println("The total earnings of " + flowerShop.getName() + " is: " + flowerShop.getTotalEarnings() + ".");
+	}
+	
+	public void printNetWorth() {
+		System.out.println("The total net worth of the stock is: " + flowerShop.getNetWorth() + ".");
+	}
+	
+	public void printStockQuantities() {
+		flowerShop.getProductMap().forEach((key, value) -> System.out.println("The total amount of " + key + " in stock is: " + value + "."));
 	}
 	
 }

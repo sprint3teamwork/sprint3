@@ -1,19 +1,27 @@
 package org.example.model.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FlowerShop {
+	
     private String name;
     private List<Product> stockList;
     private List<Invoice> invoiceLog;
     private double totalEarnings;
+    private double netWorth;
+    private Map<String, Integer> productMap;
 
-    public FlowerShop(String name) {
+	public FlowerShop(String name) {
         this.name = name;
         this.stockList = new ArrayList<>();
         this.invoiceLog = new ArrayList<>();
         this.totalEarnings = 0.0d;
+        this.netWorth = 0.0d;
+        this.productMap = new HashMap<>();
+        createMap();
     }
 
     public String getName() {
@@ -48,12 +56,39 @@ public class FlowerShop {
         this.totalEarnings = totalEarnings;
     }
 
+    public double getNetWorth() {
+    	return netWorth;
+    }
+    
+    public void setNetWorth(double netWorth) {
+    	this.netWorth = netWorth;
+    }
+    
+    public Map<String, Integer> getProductMap() {
+    	return productMap;
+    }
+    
+    public void setProductMap(Map<String, Integer> productMap) {
+    	this.productMap = productMap;
+    }
+    
+    public void createMap() {
+    	productMap.put("Tree", 0);
+    	productMap.put("Flower", 0);
+    	productMap.put("Decoration", 0);
+    }
+    
+    //aqui me sale error con el get objeto
     public void addStock(Product p){
         stockList.add(p);
+        netWorth += p.getPrice();
+        productMap.put(p.getType(), (int) productMap.get(p.getType()) + 1); // Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.util.Map.get(Object)" is null
     }
 
     public void removeStock(Product p){
         if(stockList.contains(p)){
+        	netWorth -= p.getPrice();
+        	productMap.put(p.getType(), (int) productMap.get(p.getType()) - 1);
             stockList.remove(p);
         }else{
             //we need to think where and how will we deal with this
