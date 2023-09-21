@@ -1,11 +1,11 @@
 package org.example.model.domain;
 
 public class Product {
-    private static int idNextNumber = 1;
-    private int id;
-    private String name;
-    private double price;
-    private String type;
+    protected static int idNextNumber = 1;
+    protected int id;
+    protected String name;
+    protected double price;
+    protected String type;
 
 
 
