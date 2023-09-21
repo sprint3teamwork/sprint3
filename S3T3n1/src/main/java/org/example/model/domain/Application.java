@@ -296,4 +296,16 @@ public class Application {
     public static void invoiceLog(){
         flowerShop.showInvoiceList();
     }
+
+    public void printTotalEarnings() {
+		System.out.println("The total earnings of " + flowerShop.getName() + " is: " + flowerShop.getTotalEarnings() + ".");
+	}
+	
+	public void printNetWorth() {
+		System.out.println("The total net worth of the stock is: " + flowerShop.getNetWorth() + ".");
+	}
+	
+	public void printStockQuantities() {
+		flowerShop.getProductMap().forEach((key, value) -> System.out.println("The total amount of " + key + " in stock is: " + value + "."));
+	}
 }
