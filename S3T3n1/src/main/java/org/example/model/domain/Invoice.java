@@ -8,7 +8,14 @@ public class Invoice {
 	private int id;
 	private List<Product> productList;
 	private double totalSale = 0.0;
-	
+	private String readProductList;
+
+	public Invoice(int id, String readProductList, double totalSale){
+		this.id = id;
+		this.readProductList = readProductList;
+		this.totalSale = totalSale;
+
+	}
 	public Invoice() {
 		id = idNextNumber;
 		idNextNumber++;
@@ -81,6 +88,8 @@ public class Invoice {
 				stringBuilder.append(", ");
 			}
 		}
+
+		//Do something else if invoice is from db;
 
 		stringBuilder.append("] | TOTAL: ").append(this.totalSale).append("€");
 
