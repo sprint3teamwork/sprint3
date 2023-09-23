@@ -9,6 +9,12 @@ public class Decoration extends Product{
         this.materialIsWood = materialIsWood;
     }
 
+    public Decoration(int id, String name, double price, boolean materialIsWood) {
+        super(id, name, price);
+        super.setType("Decoration");
+        this.materialIsWood = materialIsWood;
+    }
+
     public boolean isMaterialIsWood() {
         return materialIsWood;
     }

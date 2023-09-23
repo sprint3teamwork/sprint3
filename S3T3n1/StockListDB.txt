@@ -1,0 +1,4 @@
+Id = 1 | Name = Oak | Price = 24.0 | Height = 45.0 | Type = Tree
+Id = 2 | Name = Dalia | Price = 24.0 | Color = blue | Type = Flower
+Id = 3 | Name = Arc | Price = 24.0 | Is wood? = true | Type = Decoration
+Id = 4 | Name = Arc2 | Price = 24.0 | Is wood? = true | Type = Decoration
