@@ -24,7 +24,7 @@ public class Tree extends Product{
     }
 
     public String toString(){
-        return "Id = " + this.getId() + " | Name = " + this.getName() + " | Price = " + this.getPrice() +
+        return "Id = " + this.getId() + " | Name = " + this.getName() + " | Price = " + ((float) Math.round(this.getPrice() * 100) / 100) +
                 " | Height = " + this.getHeight() + " | Type = " + this.getType();
     }
 }

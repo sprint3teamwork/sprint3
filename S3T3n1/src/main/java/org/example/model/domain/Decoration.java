@@ -24,7 +24,7 @@ public class Decoration extends Product{
     }
 
     public String toString(){
-        return "Id = " + this.getId() + " | Name = " + this.getName() + " | Price = " + this.getPrice() +
+        return "Id = " + this.getId() + " | Name = " + this.getName() + " | Price = " + ((float) Math.round(this.getPrice() * 100) / 100) +
                 " | Is wood? = " + this.isMaterialIsWood() + " | Type = " + this.getType();
     }
 

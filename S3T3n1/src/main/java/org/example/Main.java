@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //Application.boot();
+        Application.boot();
 
-        ReadConnection read = new ReadConnection();
+       /* ReadConnection read = new ReadConnection();
         List<Product> products = new ArrayList<>();
         List<Invoice> invoices = new ArrayList<>();
         products = read.stockListReader();
@@ -19,6 +19,6 @@ public class Main {
 
         products.forEach(p -> System.out.println(p.toString()));
         System.out.println("\n");
-        invoices.forEach(p -> System.out.println(p.toString()));
+        invoices.forEach(p -> System.out.println(p.toString()));*/
     }
 }
