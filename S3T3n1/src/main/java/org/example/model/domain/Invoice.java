@@ -8,11 +8,11 @@ public class Invoice {
 	private int id;
 	private List<Product> productList;
 	private double totalSale = 0.0;
-	private String readProductList;
+	private String loadedProductList = "";
 
-	public Invoice(int id, String readProductList, double totalSale){
+	public Invoice(int id, String loadedProductList, double totalSale){
 		this.id = id;
-		this.readProductList = readProductList;
+		this.loadedProductList = loadedProductList;
 		this.totalSale = totalSale;
 
 	}
@@ -64,8 +64,6 @@ public class Invoice {
 		if(productList.contains(p)){
 			productList.remove(p);
 			totalSale -= p.getPrice();
-		}else{
-			//we need to think were we'll deal with this
 		}
 	}
 	
@@ -79,8 +77,17 @@ public class Invoice {
 	}*/
 
 	public String toString() {
+
+		if(productList == null){
+			return "Id = " + this.id + " | [" + this.loadedProductList + "] | TOTAL: " + this.totalSale + "€";
+		}else {
+			return stringBuilderInAppInvoices();
+		}
+	}
+
+	public String stringBuilderInAppInvoices(){
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Id = ").append(this.id).append(" | [");
+		stringBuilder.append("Id = ").append(this.id).append(" | [").append(this.loadedProductList);
 
 		for (int i = 0; i < productList.size(); i++) {
 			stringBuilder.append("(").append(i + 1).append(")").append(productList.get(i).getName());
@@ -88,9 +95,6 @@ public class Invoice {
 				stringBuilder.append(", ");
 			}
 		}
-
-		//Do something else if invoice is from db;
-
 		stringBuilder.append("] | TOTAL: ").append(this.totalSale).append("€");
 
 		return stringBuilder.toString();
