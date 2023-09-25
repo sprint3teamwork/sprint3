@@ -2,14 +2,21 @@ package org.example.model.domain;
 
 import java.util.Scanner;
 
+import org.example.model.repository.WriteConnection;
+
 public class Application {
+	
     static Scanner sc = new Scanner(System.in);
     static FlowerShop flowerShop = null;
     static ProductFactory productFactory = new ProductFactory();
+    static WriteConnection wc = new WriteConnection();
+    
     public static void boot() {
         int option = -1;
+       
+        wc.connect();
 
-        createSmapleData();/////////////////////////////////////////////////////////////////////////////////////////
+       createSmapleData();/////////////////////////////////////////////////////////////////////////////////////////
         do {
             option = menu();
             switch(option) {
@@ -57,7 +64,10 @@ public class Application {
     }
 
     public static void closeApplication(){
-        //Persistency goes here
+    	
+    	wc.invoiceLogWriter(flowerShop.getInvoiceLog());		//aqui coje la lista entera y añade, no escribe lo nuevo. la logica  
+    	wc.stockListWriter(flowerShop.getStockList());
+    	
         System.out.println("See You Soon!");
         sc.close();
     }
@@ -88,6 +98,13 @@ public class Application {
         flowerShop.addStock(flower);
         flowerShop.addStock(woodArc);
         flowerShop.addStock(woodArc2);
+        
+        Invoice invoice = new Invoice();
+        invoice.addProduct(tree);
+        invoice.addProduct(flower);
+        invoice.addProduct(woodArc);
+        invoice.addProduct(woodArc2);
+        flowerShop.addInvoice(invoice);
     }
 
 //////////////// Christian methods //////////////////////////////
