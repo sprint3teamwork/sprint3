@@ -7,7 +7,11 @@ public class Product {
     protected double price;
     protected String type;
 
-
+    public Product(int id,String name, double price){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
     public Product(String name, double price) {
         id = idNextNumber;
