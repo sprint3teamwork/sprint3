@@ -12,6 +12,7 @@ public class Invoice {
 
 	public Invoice(int id, String loadedProductList, double totalSale){
 		this.id = id;
+		idNextNumber = id +1;
 		this.loadedProductList = loadedProductList;
 		this.totalSale = totalSale;
 

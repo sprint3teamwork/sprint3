@@ -17,12 +17,12 @@ public class WriteConnection implements Connector{
     @Override
     public void connect() {
         
-    	try {
+    	//try {
     		
-    		InvoiceLogDB = new File("InvoiceLogDB.txt");
-    		StockListDB = new File("StockListDB.txt");
+    		InvoiceLogDB = new File("C:\\Users\\formacio\\1.Intellij Projects\\sprint3\\S3T3n1\\InvoiceLogDB.txt");
+    		StockListDB = new File("C:\\Users\\formacio\\1.Intellij Projects\\sprint3\\S3T3n1\\StockListDB.txt");
     		
-			if (InvoiceLogDB.createNewFile()) {
+			/*if (InvoiceLogDB.createNewFile()) {
 				System.out.println("New Txt Database created: " + InvoiceLogDB.getName());
 			} else {
 				System.out.println("File database for invoice already exists.");
@@ -36,7 +36,7 @@ public class WriteConnection implements Connector{
 			
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-		}
+		}*/
 
     }
 
@@ -54,8 +54,8 @@ public class WriteConnection implements Connector{
     		
     		try {
     			//BufferedWriter bw = new BufferedWriter(new FileWriter(InvoiceLogDB,true));
-    			PrintWriter pw = new PrintWriter(new FileOutputStream(InvoiceLogDB,true));		//or file writer
-    			pw.write("Invoice: " + invoiceLog.get(i).toString() + "\n");
+    			PrintWriter pw = new PrintWriter(new FileOutputStream(InvoiceLogDB,false));		//or file writer
+    			pw.write(invoiceLog.get(i).toString() + "\n");
     			//pw.append("Invoice: " + invoiceId + "," + invoiceString + "," + invoiceTotalSale + "\n");		//if individual fields are needed
     			pw.close();
     		} catch (IOException ioe) {
@@ -65,7 +65,7 @@ public class WriteConnection implements Connector{
         //   ' : ' colon will be default end of line symbol
     }
     
-    public void stockListWriter(List<Product> stockList){
+    public void stockListWriter(List<Product> stockList) {
     	/*int productId;
 		String productName;
 		double productPrice;				///variables if needed for different types
@@ -73,8 +73,9 @@ public class WriteConnection implements Connector{
 		float productHeight;
 		String productColor;
 		boolean productMaterial;*/
-		
-    	for (int i = 0; i < stockList.size(); i++) {
+
+
+		for (int i = 0; i < stockList.size(); i++) {
     		/*productId = stockList.get(i).getId();
     		productName = stockList.get(i).getName();
     		productPrice = stockList.get(i).getPrice();
@@ -93,14 +94,14 @@ public class WriteConnection implements Connector{
     			
     			break;
     		}*/
-    		
-    		try {		//stick this within each switch statement?
-    			BufferedWriter bw = new BufferedWriter(new FileWriter(StockListDB,true));
-    			//PrintWriter pw = new PrintWriter(new FileOutputStream(StockListDB,true));
-    			bw.write("Stock: " + stockList.get(i).toString() + "\n");
-    			bw.close();
-    			
-    			//////////if needed to get individual field items ///////
+
+			try {        //stick this within each switch statement?
+				BufferedWriter bw = new BufferedWriter(new FileWriter(StockListDB.getAbsoluteFile(), true));
+				//PrintWriter pw = new PrintWriter(new FileOutputStream(StockListDB,true));
+				bw.write(stockList.get(i).toString() + "\n");
+				bw.close();
+
+				//////////if needed to get individual field items ///////
     			/*if (productType.equalsIgnoreCase("tree")) {
     				Tree t = (Tree) stockList.get(i);
         			productHeight = t.getHeight();
@@ -118,14 +119,13 @@ public class WriteConnection implements Connector{
     				pw.append("Stock: " + productId + "," + productName + "," + productPrice + "," + productType + "," + productMaterial + "\n");
         			pw.close();
     			}*/
-    			
-    		} catch (IOException ioe) {
-    			System.out.println(ioe.getMessage());
-    		}
-    	}
-        //   ' : ' colon will be default end of line symbol
-    }
-      
+
+			} catch (IOException ioe) {
+				System.out.println(ioe.getMessage());
+			}
+		}
+		//   ' : ' colon will be default end of line symbol
+	}
 }
 
 

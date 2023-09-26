@@ -9,6 +9,7 @@ public class Product {
 
     public Product(int id,String name, double price){
         this.id = id;
+        idNextNumber = id +1;
         this.name = name;
         this.price = price;
     }

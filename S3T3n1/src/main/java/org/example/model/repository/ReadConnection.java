@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 public class ReadConnection implements Connector{
     static List<Invoice> invoiceLogRetrieved = new ArrayList<>();
     static List<Product> stockListRetrieved = new ArrayList<>();
-    static File invoiceLogDB = new File("InvoiceLogDB.txt");
-    static File stockListDB = new File("StockListDB.txt");
+    static File invoiceLogDB = new File("C:\\Users\\formacio\\1.Intellij Projects\\sprint3\\S3T3n1\\InvoiceLogDB.txt");
+    static File stockListDB = new File("C:\\Users\\formacio\\1.Intellij Projects\\sprint3\\S3T3n1\\StockListDB.txt");
 
     @Override
     public void connect() {

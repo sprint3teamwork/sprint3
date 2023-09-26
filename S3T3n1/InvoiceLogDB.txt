@@ -1,2 +1,1 @@
-Id = 1 | [(1)Dalia] | TOTAL: 24.0€
-Id = 2 | [(1)Arc, (2)Oak] | TOTAL: 48.0€
+Id = 1 | [(1)Oak, (2)Dalia, (3)Arc, (4)Arc2] | TOTAL: 96.0€
