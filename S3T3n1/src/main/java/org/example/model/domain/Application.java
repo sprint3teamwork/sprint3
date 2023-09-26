@@ -8,7 +8,7 @@ import org.example.model.repository.WriteConnection;
 public class Application {
 	
     static Scanner sc = new Scanner(System.in);
-    static FlowerShop flowerShop = null;
+    static FlowerShop flowerShop = new FlowerShop("");
     static ProductFactory productFactory = new ProductFactory();
     static WriteConnection wc = new WriteConnection();
     static ReadConnection rc = new ReadConnection();
@@ -17,6 +17,11 @@ public class Application {
         int option = -1;
        
         wc.connect();
+        flowerShop.setInvoiceLog(rc.invoiceLogReader());
+        flowerShop.setStockList(rc.stockListReader());
+        flowerShop.setTotalEarnings(rc.getTotalEarnings());
+        flowerShop.setStockTotalValue(rc.getStockTotalValue());
+        flowerShop.setProductMap(rc.getProductMap());//This line of codes turns somhow this map into null
 
 
        //createSmapleData();/////////////////////////////////////////////////////////////////////////////////////////
@@ -67,13 +72,8 @@ public class Application {
     }
 
     public static void closeApplication(){
-        System.out.println(flowerShop.getInvoiceLog().toString());
-        System.out.println(flowerShop.getStockList().toString());
-    	wc.invoiceLogWriter(flowerShop.getInvoiceLog());		//aqui coje la lista entera y añade, no escribe lo nuevo. la logica  
+    	wc.invoiceLogWriter(flowerShop.getInvoiceLog());
     	wc.stockListWriter(flowerShop.getStockList());
-        //wc.stockListWriter(flowerShop.getStockList());
-        System.out.println(flowerShop.getInvoiceLog().toString());
-        System.out.println(flowerShop.getStockList().toString());
         System.out.println("See You Soon!");
         sc.close();
     }
@@ -81,16 +81,17 @@ public class Application {
     public static void createFlowerShop(){
         String name = "";
 
-        if(flowerShop == null){
+        if(rc.stockListDBIsEmpty() & rc.invoiceLogDBIsEmpty() & flowerShop.getName().length() < 1) {
             System.out.println("Introduce the flower shop name: ");
             name = sc.nextLine();
-            flowerShop = new FlowerShop(name);
-            flowerShop.setInvoiceLog(rc.invoiceLogReader());
-            flowerShop.setStockList(rc.stockListReader());
-            System.out.println(flowerShop.getInvoiceLog().toString());
-            System.out.println(flowerShop.getStockList().toString());
-        }else{
-            System.out.println("You already created a flower-shop, you greedy bastard!\n");
+            flowerShop.setName(name);
+            System.out.println("The flower-shop " + name + " was created successfully!\n");
+
+        } else if (rc.stockListDBIsEmpty() & rc.invoiceLogDBIsEmpty() & flowerShop.getStockList().isEmpty() & flowerShop.getInvoiceLog().isEmpty()) {
+            System.out.println("You alreday have a flower-shop. Just start adding stock. Jeez...\n");
+
+        } else{
+            System.out.println("You already created a flower-shop, you greedy bastard! Press 5 and you'll see the records\n");
         }
 
     }
