@@ -103,8 +103,6 @@ public class FlowerShop {
         if(invoiceLog.contains(i)){
             invoiceLog.remove(i);
             totalEarnings -= i.getTotalSale();
-        }else{
-            //we need to think where and how will we deal with this
         }
     }
 

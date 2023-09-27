@@ -27,33 +27,13 @@ public class Invoice {
 		return productList;
 	}
 
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
-	}
-
 	public double getTotalSale() {
 		return totalSale;
-	}
-
-	public void setTotalSale(double totalSale) {
-		this.totalSale = totalSale;
 	}
 
 	public int getId() {
 		return id;
 	}
-	
-	/*public int searchProductList(int productId) {		//returns -1 if product is not in list.
-		int counter = 0;
-		int index = -1;
-		while (productList.get(counter).getId() != productId && counter < productList.size()) {
-			if (productList.get(counter).getId() == productId) {
-				index = counter;
-			}
-			counter++;
-		}
-		return index;
-	}*/
 	
 	public void addProduct(Product p) {
 
@@ -67,15 +47,6 @@ public class Invoice {
 			totalSale -= p.getPrice();
 		}
 	}
-	
-	public void printProductList() {
-		productList.forEach(System.out::println);
-	}
-	
-	/*public void sumTotal() {
-		productList.forEach(p -> this.totalSale += p.getPrice());
-		System.out.println(this.totalSale);
-	}*/
 
 	public String toString() {
 

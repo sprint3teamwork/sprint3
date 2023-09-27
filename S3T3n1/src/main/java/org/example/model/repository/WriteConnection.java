@@ -41,9 +41,8 @@ public class WriteConnection implements Connector{
 		
     	try {
     		BufferedWriter bw = new BufferedWriter(new FileWriter(InvoiceLogDB,false));
-    		for (int i = 0; i < invoiceLog.size(); i++) {//or file writer
+    		for (int i = 0; i < invoiceLog.size(); i++) {
     			bw.write(invoiceLog.get(i).toString() + "\n");
-    			//pw.append("Invoice: " + invoiceId + "," + invoiceString + "," + invoiceTotalSale + "\n");		//if individual fields are needed
     		}
     		bw.close();
     	} catch (IOException ioe) {

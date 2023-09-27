@@ -22,10 +22,8 @@ public class Application {
         flowerShop.setStockList(rc.stockListReader());
         flowerShop.setTotalEarnings(rc.getTotalEarnings());
         flowerShop.setStockTotalValue(rc.getStockTotalValue());
-        flowerShop.setProductMap(rc.getProductMap());//This line of codes turns somhow this map into null
+        flowerShop.setProductMap(rc.getProductMap());
 
-
-       //createSmapleData();/////////////////////////////////////////////////////////////////////////////////////////
         do {
             option = menu();
             switch(option) {
@@ -96,30 +94,6 @@ public class Application {
         }
 
     }
-
-  //TEST DATA////////////////////////////////////////////////////////////////////////////////////////
-    public static void createSmapleData(){
-
-        flowerShop = new FlowerShop("La Rosita");
-
-        Product tree = new Tree("Oak",24.0d, 45f);
-        Product flower = new Flower("Dalia",24.0d, "blue");
-        Product woodArc = new Decoration("Arc",24.0d, true);
-        Product woodArc2 = new Decoration("Arc2",24.0d, true);
-        flowerShop.addStock(tree);
-        flowerShop.addStock(flower);
-        flowerShop.addStock(woodArc);
-        flowerShop.addStock(woodArc2);
-        
-        Invoice invoice = new Invoice();
-        invoice.addProduct(tree);
-        invoice.addProduct(flower);
-        invoice.addProduct(woodArc);
-        invoice.addProduct(woodArc2);
-        flowerShop.addInvoice(invoice);
-    }
-
-//////////////// Christian methods //////////////////////////////
 
     public static int searchList(int id, String type) {        //returns -1 if product is not in list.
         int index = -1;
@@ -242,27 +216,6 @@ public class Application {
         System.out.println("\n");
     }
 
-    /*public static void showStockByTypePrompt(){
-        int option;
-
-        System.out.print("Select numerical option:  (1).Tree       (2).Flower      (3).Decoration\nOption: ");
-        option = sc.nextInt();
-        sc.nextLine();
-
-        while (option < 1 || option > 3){
-            System.out.print("Invalid option. Try again:  (1).Tree       (2).Flower      (3).Decoration\nOption: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
-
-        switch (option){
-            case 1 -> showStockByType("Tree");
-            case 2 -> showStockByType("Flower");
-            case 3 -> showStockByType("Decoration");
-        }
-    }*/
-
-    //ARNAU METODS
     public static void addTree(){
         String name = "";
         float price = 0.0f;
@@ -402,7 +355,6 @@ public class Application {
         p = invoice.getProductList().get(numberSelected-1);
         invoice.removeProduct(p);
         flowerShop.addStock(p);
-        //add sum to networth/stockvalue
         System.out.println("\n'" + p.getName() + "' was deleted succesfully.\n");
     }
 
