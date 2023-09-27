@@ -1,11 +1,6 @@
 package org.example;
 
-import org.example.model.domain.*;
-import org.example.model.repository.Connector;
-import org.example.model.repository.ReadConnection;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.example.model.service.Application;
 
 public class Main {
     public static void main(String[] args) {

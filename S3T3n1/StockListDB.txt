@@ -1,2 +1,1 @@
-Id = 1 | Name = adfg | Price = 4.0 | Height = 6.0 | Type = Tree
-Id = 3 | Name = fdhdgfh | Price = 56.0 | Is wood? = true | Type = Decoration
+Id = 3 | Name = Wood arc | Price = 45.9 | Is wood? = true | Type = Decoration
