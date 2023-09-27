@@ -38,17 +38,17 @@ public class WriteConnection implements Connector{
     }
 
     public void invoiceLogWriter(List<Invoice> invoiceLog){
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(InvoiceLogDB,false));
-            for (int i = 0; i < invoiceLog.size(); i++) {//or file writer
-                bw.write(invoiceLog.get(i).toString() + "\n");
-                //pw.append("Invoice: " + invoiceId + "," + invoiceString + "," + invoiceTotalSale + "\n");		//if individual fields are needed
-            }
-            bw.close();
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+		
+    	try {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(InvoiceLogDB,false));
+    		for (int i = 0; i < invoiceLog.size(); i++) {//or file writer
+    			bw.write(invoiceLog.get(i).toString() + "\n");
+    			//pw.append("Invoice: " + invoiceId + "," + invoiceString + "," + invoiceTotalSale + "\n");		//if individual fields are needed
+    		}
+    		bw.close();
+    	} catch (IOException ioe) {
+    		System.out.println(ioe.getMessage());
+    	}
 
     }
 
