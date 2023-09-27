@@ -1,7 +1,8 @@
-package org.example.model.domain;
+package org.example.model.service;
 
 import java.util.Scanner;
 
+import org.example.model.domain.*;
 import org.example.model.repository.ReadConnection;
 import org.example.model.repository.WriteConnection;
 
