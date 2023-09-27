@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Application.boot();
 
-       /* ReadConnection read = new ReadConnection();
+       /*ReadConnection read = new ReadConnection();
         List<Product> products = new ArrayList<>();
         List<Invoice> invoices = new ArrayList<>();
         products = read.stockListReader();
