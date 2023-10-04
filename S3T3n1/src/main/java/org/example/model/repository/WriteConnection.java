@@ -16,8 +16,8 @@ public class WriteConnection implements Connector{
 
         try {
 
-            InvoiceLogDB = new File("InvoiceLogDB.txt");
-            StockListDB = new File("StockListDB.txt");
+            InvoiceLogDB = new File("S3T3n1\\InvoiceLogDB.txt");
+            StockListDB = new File("S3T3n1\\StockListDB.txt");
 
             if (InvoiceLogDB.createNewFile()) {
                 System.out.println("New Txt Database created: " + InvoiceLogDB.getName());
